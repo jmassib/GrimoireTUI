@@ -754,8 +754,10 @@ dependencies = [
  "grimoire-core",
  "ratatui",
  "rodio",
+ "serde",
  "serde_json",
  "signal-hook",
+ "toml",
  "ureq",
  "windows-sys 0.61.2",
 ]

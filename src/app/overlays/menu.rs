@@ -199,6 +199,10 @@ pub fn about_row(action: &Action, part: &str) -> (String, &'static str) {
             "Search every scene and note for a word or phrase, and replace it everywhere if you like.",
             "find",
         ),
+        Action::Treino => (
+            "Saves the book and opens the Treino: a habit session, writing exercises, or Continue a frase, in Portuguese, with a 30 minute limit.",
+            "treino",
+        ),
         Action::Sessions => (
             "Your writing sittings, like a diary: when you wrote, where, and how many words. Each one can be looked back at.",
             "sessions",

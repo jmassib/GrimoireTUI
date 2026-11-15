@@ -55,6 +55,7 @@ pub const TOPICS: &[Topic] = &[
     topic!("paperback", "Paperback & EPUB", "19-paperback-and-epub.md"),
     topic!("sync", "Sync & conflicts", "20-sync-and-conflicts.md"),
     topic!("sessions", "Writing sessions", "21-writing-sessions.md"),
+    topic!("treino", "Treino: hábito e exercícios", "28-treino.md"),
     topic!("on-disk", "On disk", "22-on-disk.md"),
     topic!("settings", "Settings", "23-settings.md"),
     topic!("keys", "Every key", "24-every-key.md"),

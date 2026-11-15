@@ -1,0 +1,398 @@
+# Frases de abertura para o exercício "Continue a frase".
+#
+# Cada frase é um bloco [[frase]] com:
+#   autor    = quem escreveu
+#   obra     = o livro ou o conto
+#   ano      = ano da publicação original (opcional)
+#   tradutor = quem traduziu para o português do Brasil (só em obras traduzidas)
+#   texto    = a frase de abertura (uma ou duas linhas, no máximo)
+#   fonte    = onde o texto foi conferido (opcional)
+#
+# Só entram frases curtas, conferidas no texto publicado em português do Brasil.
+# "…" no fim marca que a frase original continua.
+# Para acrescentar uma frase, copie um bloco e troque os campos.
+
+# ── Autores brasileiros ─────────────────────────────────────────────
+
+[[frase]]
+autor = "Machado de Assis"
+obra = "Dom Casmurro"
+ano = 1899
+texto = "Uma noite destas, vindo da cidade para o Engenho Novo, encontrei no trem da Central um rapaz aqui do bairro, que eu conheço de vista e de chapéu."
+fonte = "https://folheio.com.br/ler/dom-casmurro/1"
+
+[[frase]]
+autor = "Machado de Assis"
+obra = "Memórias póstumas de Brás Cubas"
+ano = 1881
+texto = "Algum tempo hesitei se devia abrir estas memórias pelo princípio ou pelo fim, isto é, se poria em primeiro lugar o meu nascimento ou a minha morte."
+fonte = "https://machadodeassis.net/texto/memorias-postumas-de-bras-cubas/5985"
+
+[[frase]]
+autor = "Machado de Assis"
+obra = "Esaú e Jacó"
+ano = 1904
+texto = "Era a primeira vez que as duas iam ao Morro do Castelo."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/533757-esau-e-jaco-de-machado-de-assis/"
+
+[[frase]]
+autor = "Machado de Assis"
+obra = "Missa do galo"
+ano = 1899
+texto = "Nunca pude entender a conversação que tive com uma senhora, há muitos anos, contava eu dezessete, ela, trinta."
+fonte = "https://machado.byu.edu/text/missa-do-galo/"
+
+[[frase]]
+autor = "Lima Barreto"
+obra = "Recordações do escrivão Isaías Caminha"
+ano = 1909
+texto = "A tristeza, a compreensão e a desigualdade de nível mental do meu meio familiar, agiram sobre mim de modo curioso: deram-me anseios de inteligência."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/534659-recordacoes-do-escrivao-isaias-caminha-de-lima-barreto/"
+
+[[frase]]
+autor = "Lima Barreto"
+obra = "Triste fim de Policarpo Quaresma"
+ano = 1915
+texto = "Como de hábito, Policarpo Quaresma, mais conhecido por Major Quaresma, bateu em casa às quatro e quinze da tarde."
+fonte = "https://pt.wikisource.org/wiki/Triste_Fim_de_Policarpo_Quaresma/I/I"
+
+[[frase]]
+autor = "Mário de Andrade"
+obra = "Macunaíma"
+ano = 1928
+texto = "No fundo do mato-virgem nasceu Macunaíma, herói de nossa gente."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/531999-macunaima-de-mario-de-andrade"
+
+[[frase]]
+autor = "Mário de Andrade"
+obra = "O peru de Natal (Contos novos)"
+ano = 1947
+texto = "O nosso primeiro Natal de família, depois da morte de meu pai acontecida cinco meses antes, foi de conseqüências decisivas para a felicidade familiar."
+fonte = "https://contobrasileiro.com.br/o-peru-de-natal-conto-de-mario-de-andrade/"
+
+[[frase]]
+autor = "Graciliano Ramos"
+obra = "Caetés"
+ano = 1933
+texto = "Adrião, arrastando a perna, tinha-se recolhido ao quarto, queixando-se de uma forte dor de cabeça."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/536483-caetes-de-graciliano-ramos/"
+
+[[frase]]
+autor = "Graciliano Ramos"
+obra = "São Bernardo"
+ano = 1934
+texto = "Antes de iniciar este livro, imaginei construí-lo pela divisão do trabalho."
+fonte = "https://literaturaonline.com.br/livro/sao-bernardo/"
+
+[[frase]]
+autor = "Graciliano Ramos"
+obra = "Angústia"
+ano = 1936
+texto = "Levantei-me há cerca de trinta dias, mas julgo que ainda não me restabeleci completamente."
+fonte = "https://gamarevista.uol.com.br/cultura/trecho-de-livro/angustia/"
+
+[[frase]]
+autor = "Graciliano Ramos"
+obra = "Vidas secas"
+ano = 1938
+texto = "Na planície avermelhada os juazeiros alargavam duas manchas verdes."
+fonte = "https://pt.wikipedia.org/wiki/Vidas_Secas"
+
+[[frase]]
+autor = "Erico Verissimo"
+obra = "Clarissa"
+ano = 1933
+texto = "Sob os jacarandás floridos da velha Praça da matriz de Porto Alegre, caminhava uma rapariga no seu uniforme de normalista."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/533648-clarissa-de-erico-verissimo/"
+
+[[frase]]
+autor = "Erico Verissimo"
+obra = "O Continente (O tempo e o vento)"
+ano = 1949
+texto = "Era uma noite fria de lua cheia. As estrelas cintilavam sobre a cidade de Santa Fé, que de tão quieta e deserta parecia um cemitério abandonado."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/538489-o-continente-de-erico-verissimo/"
+
+[[frase]]
+autor = "Cyro dos Anjos"
+obra = "O amanuense Belmiro"
+ano = 1937
+texto = "Ali pelo oitavo chope, chegamos à conclusão de que todos os problemas eram insolúveis."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/534424-o-amanuense-belmiro-de-cyro-dos-anjos/"
+
+[[frase]]
+autor = "Clarice Lispector"
+obra = "Perto do coração selvagem"
+ano = 1943
+texto = "A máquina do papai batia tac-tac... tac-tac-tac... O relógio acordou em tin-dlen sem poeira."
+fonte = "https://pt.wikiquote.org/wiki/Perto_do_Cora%C3%A7%C3%A3o_Selvagem"
+
+[[frase]]
+autor = "Clarice Lispector"
+obra = "Amor (Laços de família)"
+ano = 1960
+texto = "Um pouco cansada, com as compras deformando o novo saco de tricô, Ana subiu no bonde."
+fonte = "https://contobrasileiro.com.br/amor-conto-de-clarice-lispector/"
+
+[[frase]]
+autor = "Clarice Lispector"
+obra = "A paixão segundo G.H."
+ano = 1964
+texto = "Estou procurando, estou procurando. Estou tentando entender."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/532259-a-paixao-segundo-gh-de-clarice-lispector/"
+
+[[frase]]
+autor = "Clarice Lispector"
+obra = "Felicidade clandestina"
+ano = 1971
+texto = "Ela era gorda, baixa, sardenta e de cabelos excessivamente crespos, meio arruivados."
+fonte = "https://concursos.estrategia.com/public/questoes/Felicidade959b60e0f8a/"
+
+[[frase]]
+autor = "Clarice Lispector"
+obra = "A hora da estrela"
+ano = 1977
+texto = "Tudo no mundo começou com um sim. Uma molécula disse sim a outra molécula e nasceu a vida."
+fonte = "https://site.claricelispector.ims.com.br/originais/nota-02/"
+
+[[frase]]
+autor = "Guimarães Rosa"
+obra = "Grande sertão: veredas"
+ano = 1956
+texto = "Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja."
+fonte = "https://www.academia.org.br/academicos/joao-guimaraes-rosa/textos-escolhidos"
+
+[[frase]]
+autor = "Guimarães Rosa"
+obra = "A terceira margem do rio (Primeiras estórias)"
+ano = 1962
+texto = "Nosso pai era homem cumpridor, ordeiro, positivo; e sido assim desde mocinho e menino, pelo que testemunharam as diversas sensatas pessoas, quando indaguei a informação."
+fonte = "https://www.academia.org.br/academicos/joao-guimaraes-rosa/textos-escolhidos"
+
+[[frase]]
+autor = "Campos de Carvalho"
+obra = "A lua vem da Ásia"
+ano = 1956
+texto = "Aos 16 anos matei meu professor de lógica."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/531533-a-lua-vem-da-asia-de-campos-de-carvalho/"
+
+[[frase]]
+autor = "Murilo Rubião"
+obra = "O ex-mágico da Taberna Minhota"
+ano = 1947
+texto = "Hoje sou funcionário público e este não é o meu desconsolo maior."
+fonte = "https://www.fantasticacultural.com.br/artigo/61/o_ex-magico_da_taberna_minhota_-_murilo_rubiao__conto_completo"
+
+[[frase]]
+autor = "Jorge Amado"
+obra = "A morte e a morte de Quincas Berro Dágua"
+ano = 1961
+texto = "Até hoje permanece certa confusão em torno da morte de Quincas Berro Dágua."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/534657-a-morte-e-a-morte-de-quincas-berro-dagua-de-jorge-amado/"
+
+[[frase]]
+autor = "Jorge Amado"
+obra = "Dona Flor e seus dois maridos"
+ano = 1966
+texto = "Vadinho, o primeiro marido de Dona Flor, morreu num domingo de carnaval, pela manhã, quando, fantasiado de baiana, sambava num bloco…"
+fonte = "https://conversadeportugues.com.br/2015/02/literatura-e-carnaval/"
+
+[[frase]]
+autor = "Dalton Trevisan"
+obra = "Guerra conjugal"
+ano = 1969
+texto = "João era casado com Maria e moravam em barraco de duas peças no Juvevê; a rua de lama, ele não queria que a dona molhasse os pezinhos."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/536486-guerra-conjugal-de-dalton-trevisan/"
+
+[[frase]]
+autor = "Lygia Fagundes Telles"
+obra = "Venha ver o pôr do sol"
+ano = 1970
+texto = "Ela subiu sem pressa a tortuosa ladeira."
+fonte = "https://contobrasileiro.com.br/venha-ver-o-por-do-sol-conto-de-lygia-fagundes-telles/"
+
+[[frase]]
+autor = "Rubem Fonseca"
+obra = "Feliz ano novo"
+ano = 1975
+texto = "Vi na televisão que as lojas bacanas estavam vendendo adoidado roupas ricas para as madames vestirem no réveillon."
+fonte = "https://contobrasileiro.com.br/feliz-ano-novo-conto-de-rubem-fonseca/"
+
+[[frase]]
+autor = "Raduan Nassar"
+obra = "Lavoura arcaica"
+ano = 1975
+texto = "Os olhos no teto, a nudez dentro do quarto; …"
+fonte = "https://www.scielo.br/j/bak/a/Bb7jfFt4KCShcZH3PB4Nnct/?lang=pt"
+
+[[frase]]
+autor = "Raduan Nassar"
+obra = "Um copo de cólera"
+ano = 1978
+texto = "E quando cheguei à tarde na minha casa lá no 27, ela já me aguardava…"
+fonte = "https://portaldolargo.com.br/o-livro-de-um-so-folego/"
+
+[[frase]]
+autor = "Cristovão Tezza"
+obra = "Trapo"
+ano = 1988
+texto = "Tentei de novo falar com você esta madrugada, mas o quintal estava povoado de lobos ganindo contra minha sombra."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/535210-trapo-cristovao-tezza/"
+
+[[frase]]
+autor = "Carlos Heitor Cony"
+obra = "Quase memória"
+ano = 1995
+texto = "O dia: 28 de novembro de 1995. A hora: aproximadamente vinte, talvez quinze para a uma da tarde."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/534655-quase-memoria-de-carlos-heitor-cony/"
+
+[[frase]]
+autor = "Milton Hatoum"
+obra = "Dois irmãos"
+ano = 2000
+texto = "Zana teve de deixar tudo: o bairro portuário de Manaus, a rua em declive sombreada por mangueiras centenárias…"
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/533753-dois-irmaos-de-milton-hatoum/"
+
+[[frase]]
+autor = "Chico Buarque"
+obra = "Budapeste"
+ano = 2003
+texto = "Devia ser proibido debochar de quem se aventura em língua estrangeira."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/532267-budapeste-de-chico-buarque/"
+
+# ── Clássicos do mundo, em tradução brasileira ─────────────────────
+
+[[frase]]
+autor = "Liev Tolstói"
+obra = "Anna Kariênina"
+ano = 1877
+tradutor = "Rubens Figueiredo"
+texto = "Todas as famílias felizes se parecem, cada família infeliz é infeliz à sua maneira."
+fonte = "https://www1.folha.uol.com.br/folha/livrariadafolha/ult10082u669823.shtml"
+
+[[frase]]
+autor = "Fiódor Dostoiévski"
+obra = "Notas do subsolo"
+ano = 1864
+tradutor = "Maria Aparecida Botelho Pereira Soares"
+texto = "Sou um homem doente… Sou mau."
+fonte = "https://ensaiosenotas.com/2019/10/08/dostoievski-notas-do-subsolo/"
+
+[[frase]]
+autor = "Herman Melville"
+obra = "Moby Dick"
+ano = 1851
+tradutor = "Irene Hirsch e Alexandre Barbosa de Souza"
+texto = "Trate-me por Ishmael."
+fonte = "https://www1.folha.uol.com.br/fsp/ilustrad/fq2604200807.htm"
+
+[[frase]]
+autor = "Marcel Proust"
+obra = "No caminho de Swann"
+ano = 1913
+tradutor = "Mário Quintana"
+texto = "Durante muito tempo, costumava deitar-me cedo."
+fonte = "https://www1.folha.uol.com.br/fsp/mais/fs03019912.htm"
+
+[[frase]]
+autor = "Franz Kafka"
+obra = "A metamorfose"
+ano = 1915
+tradutor = "Modesto Carone"
+texto = "Quando certa manhã Gregor Samsa acordou de sonhos intranquilos, encontrou-se em sua cama metamorfoseado num inseto monstruoso."
+fonte = "https://www1.folha.uol.com.br/fsp/mais/fs30059905.htm"
+
+[[frase]]
+autor = "Franz Kafka"
+obra = "O processo"
+ano = 1925
+tradutor = "Modesto Carone"
+texto = "Alguém certamente havia caluniado Josef K. pois uma manhã ele foi detido sem ter feito mal algum."
+fonte = "https://vestibular.uol.com.br/resumos-de-livros/trechos-do-livro-o-processo.htm"
+
+[[frase]]
+autor = "Franz Kafka"
+obra = "O castelo"
+ano = 1926
+tradutor = "Modesto Carone"
+texto = "Era tarde da noite quando K. chegou. A aldeia jazia na neve profunda."
+fonte = "https://www1.folha.uol.com.br/fsp/mais/fs28029906.htm"
+
+[[frase]]
+autor = "Albert Camus"
+obra = "O estrangeiro"
+ano = 1942
+tradutor = "Valerie Rumjanek"
+texto = "Hoje, mamãe morreu. Ou talvez ontem, não sei bem."
+fonte = "https://www.estadao.com.br/cultura/leandro-karnal/um-projeto-para-o-outono/"
+
+[[frase]]
+autor = "George Orwell"
+obra = "1984"
+ano = 1949
+tradutor = "Alexandre Hubner e Heloisa Jahn"
+texto = "Era um dia frio e luminoso de abril, e os relógios davam treze horas."
+fonte = "https://www.companhiadasletras.com.br/trecho/9788535914849"
+
+[[frase]]
+autor = "Jorge Luis Borges"
+obra = "O Aleph"
+ano = 1949
+tradutor = "Flávio José Cardozo"
+texto = "Na ardente manhã de fevereiro em que Beatriz Viterbo morreu, depois de uma imperiosa agonia que não cedeu um só instante nem ao sentimentalismo nem ao medo…"
+fonte = "https://kindlebabel.wordpress.com/2020/12/11/o-aleph-jorge-luis-borges-1949/"
+
+[[frase]]
+autor = "J. D. Salinger"
+obra = "O apanhador no campo de centeio"
+ano = 1951
+tradutor = "Álvaro Alencar, Antônio Rocha e Jório Dauster"
+texto = "Se querem mesmo ouvir o que aconteceu, a primeira coisa que vão querer saber é onde eu nasci…"
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/541008-o-apanhador-no-campo-de-centeio-de-j-d-salinger"
+
+[[frase]]
+autor = "Ernest Hemingway"
+obra = "O velho e o mar"
+ano = 1952
+tradutor = "Fernando de Castro Ferro"
+texto = "Ele era um velho que pescava sozinho em seu barco, na Gulf Stream."
+fonte = "https://vestibular.uol.com.br/resumos-de-livros/trechos-do-livro-o-velho-e-o-mar.htm"
+
+[[frase]]
+autor = "Vladimir Nabokov"
+obra = "Lolita"
+ano = 1955
+tradutor = "Jorio Dauster"
+texto = "Lolita, luz de minha vida, labareda em minha carne. Minha alma, minha lama."
+fonte = "https://rauldrewnick.blogspot.com/2016/07/paragrafo-inicial-de-lolita-de-vladimir.html"
+
+[[frase]]
+autor = "Juan Rulfo"
+obra = "Pedro Páramo"
+ano = 1955
+tradutor = "Eric Nepomuceno"
+texto = "Vim a Comala porque me disseram que aqui vivia meu pai, um tal de Pedro Páramo."
+fonte = "https://www.camara.leg.br/radio/programas/primeiros-paragrafos/534649-pedro-paramo-de-juan-rulfo/"
+
+[[frase]]
+autor = "Gabriel García Márquez"
+obra = "Cem anos de solidão"
+ano = 1967
+tradutor = "Eliane Zagury"
+texto = "Muitos anos depois, diante do pelotão de fuzilamento, o coronel Aureliano Buendía havia de recordar aquela tarde remota em que seu pai o levou para conhecer o gelo."
+fonte = "https://www.gazetadopovo.com.br/caderno-g/literatura/escritor-revela-a-historia-secreta-de-garcia-marquez-b2elw9kcqpfu25hg6ilrkb9io/"
+
+[[frase]]
+autor = "Gabriel García Márquez"
+obra = "Crônica de uma morte anunciada"
+ano = 1981
+tradutor = "Remy Gorga Filho"
+texto = "No dia em que o matariam, Santiago Nasar levantou-se às 5h30 da manhã para esperar o navio em que chegava o bispo."
+fonte = "https://rauldrewnick.blogspot.com/2013/07/abertura-de-cronica-de-uma-morte.html"
+
+[[frase]]
+autor = "Italo Calvino"
+obra = "Se um viajante numa noite de inverno"
+ano = 1979
+tradutor = "Nilson Moulin"
+texto = "Você vai começar a ler o novo romance de Italo Calvino, Se um viajante numa noite de inverno."
+fonte = "https://www1.folha.uol.com.br/fsp/mais/fs22089917.htm"

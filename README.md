@@ -18,6 +18,57 @@ plain files you can open with anything, even `cat`.
 
 <img src="assets/readme/rule.svg" width="100%" alt="">
 
+## Treino: hábito e exercícios (deste fork)
+
+Este fork tem um modo **Treino**, todo em português do Brasil, para aquecer e
+criar o hábito antes de ir para o texto. O treino tem no máximo 30 minutos.
+
+**Como abrir**
+
+```sh
+grimoire treino            # na raiz do repositório writings (ou em qualquer pasta dentro dele)
+grimoire treino ~/writings # apontando a pasta
+```
+
+Dentro do Grimoire: `Ctrl-K` › *Writing* › **Treino: hábito e exercícios…**, ou
+digite *treino* na busca do `Ctrl-K`. O livro é salvo antes de trocar.
+
+**No menu do Treino** (setas e `Enter`, ou o número):
+
+| Tecla | Modo | O que faz |
+|---|---|---|
+| `1` / `h` | Sessão de hábito | Escolha um texto de `manuscript/` (ou *Texto novo…*). Aparecem só o bilhete `[Próximo: …]` e o último parágrafo, para redigitar. Timer de 10 min (`F2` liga/desliga); no fim aparece *Pode parar — ou continue*. `Esc` pede o bilhete da próxima vez e grava no topo do texto. |
+| `2` / `e` | Exercícios | Escolha um da lista ou *Aleatório* (`a`). Instrução e meta ficam no topo. *Roleta de ideias* e *Colisão* sorteiam do `ideias.md` (`F5` sorteia outra). |
+| `3` / `f` | Continue a frase | A abertura de um livro, com autor, obra e tradutor. Escolha um ou *Aleatório* (`a`). |
+| `4` / `d` | Dicas | As 7 dicas do hábito. |
+| `5` / `g` | Ir para o meu texto | Abre o Grimoire no seu livro. |
+
+**Limite de 30 minutos** (Exercícios e Continue a frase): contagem regressiva no
+topo; aos 25 min, *Faltam 5 minutos — prepare-se para ir para o texto*; aos 30,
+o treino é salvo e aparece *Tempo de treino acabou — vá para o seu texto*, com
+`Enter` (abrir o Grimoire no seu livro), `h` (sessão de hábito no último texto),
+`m` (menu) ou `Esc` (terminar a frase). Nada do que foi escrito é apagado.
+
+**Ao escrever:** `Esc` termina e salva · `Ctrl-S` salva · `Ctrl-G` salva e vai
+para o seu texto · `Ctrl-Q` salva e sai. O treino também salva sozinho a cada
+minuto e quando a janela fecha.
+
+**Os arquivos** ficam em `exercicios/`, na raiz do repositório. O app procura a
+pasta a partir da pasta atual e do último livro aberto (ou use
+`GRIMOIRE_EXERCICIOS=/caminho/exercicios`); se não achar, cria uma com os
+arquivos padrão (de `assets/exercicios/`) ao lado do livro padrão.
+
+- `dicas.md` e `exercicios.md`: cada item começa com `## Título`; as linhas
+  seguintes são o texto; `Meta: …` é a meta (`Meta: sem meta definida.` = sem
+  meta); em exercicios.md, `Ideias: 1` ou `Ideias: 2` sorteia ideias.
+- `frases.toml`: blocos `[[frase]]` com `autor`, `obra`, `ano`, `tradutor`,
+  `texto` e `fonte`.
+- `ideias.md`: uma ideia por linha.
+- `sessoes/AAAA-MM-DD-HHMM-<nome>.md`: cada treino salvo.
+- `registro.csv`: uma linha por sessão (`data,hora,modo,atividade,minutos,palavras,arquivo`).
+
+Os testes do Treino: `cargo test --bin grimoire treino`.
+
 ## Why it exists
 
 Most novel apps make you pick. Some tuck your manuscript away in a database you

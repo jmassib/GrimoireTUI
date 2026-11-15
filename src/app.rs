@@ -174,6 +174,8 @@ pub struct App {
     baseline_date: String,
     pub msg: String,
     pub quit: bool,
+    /// Leave the book for the Treino (habit and exercises) once it's saved.
+    pub want_treino: bool,
     pub edit_width: usize,
     pub edit_height: usize,
     pub pomo: Pomodoro,
@@ -768,6 +770,7 @@ impl App {
             baseline_date: today_string(),
             msg: String::new(),
             quit: false,
+            want_treino: false,
             edit_width: 60,
             edit_height: 20,
             pomo: Pomodoro::default(),
@@ -1769,6 +1772,10 @@ impl App {
             Action::TimerReset => self.on_function_key(3),
             Action::Menu => self.open_menu(),
             Action::Quit => self.quit = true,
+            Action::Treino => {
+                self.want_treino = true;
+                self.quit = true;
+            }
             Action::FindAnything => self.open_palette(),
             Action::Submenu(sub) => self.overlay = Overlay::Sub { sub, sel: 0 },
             // The menu's own key handling brings you back to the group you
@@ -4664,6 +4671,7 @@ impl App {
                 (row("Reset the timer", "(F3)"), Action::TimerReset),
                 ("Read aloud".into(), Action::ReadAloud),
                 (row("Music player…", "(F7)"), Action::MusicPlayer),
+                ("Treino: hábito e exercícios…".into(), Action::Treino),
             ],
             Sub::Settings => vec![
                 (row("Themes…", "(F9)"), Action::Themes),

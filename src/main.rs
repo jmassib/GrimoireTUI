@@ -10,6 +10,7 @@ mod scene;
 mod scenery;
 mod shutdown;
 mod theme;
+mod treino;
 mod ui;
 mod visualizer;
 mod viz_view;
@@ -72,6 +73,11 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
+    if first.as_deref() == Some("treino") {
+        let pedida = args.next().map(PathBuf::from);
+        return desk(Desk::Treino(pedida));
+    }
+
     if first.as_deref() == Some("export") {
         return export_command(args);
     }
@@ -118,6 +124,8 @@ fn main() -> Result<()> {
         println!("                              with --docx --epub --paperback --md,");
         println!("                              a trim with --trim 6x9, parts with");
         println!("                              --parts 1,3");
+        println!("  grimoire treino [pasta]     modo Treino: sessão de hábito, exercícios");
+        println!("                              e Continue a frase (em português)");
         println!("  grimoire --version          which version, and who made it");
         println!("  grimoire music-setup <src>  connect music: youtube-music |");
         println!("                              spotify | jellyfin | plex");
@@ -176,18 +184,19 @@ fn main() -> Result<()> {
     }
 
     let (root, opening_msg) = resolve_project(first.map(PathBuf::from))?;
-    remember(&root);
+    desk(Desk::Book(root, opening_msg))
+}
 
-    let stranded = project::restore_stranded(&root);
-    let project = Project::load(&root).context("loading project")?;
-    let mut app = App::new(project)?;
-    if let Some(m) = opening_msg {
-        app.msg = m;
-    }
-    if !stranded.is_empty() {
-        app.msg = App::stranded_note(&stranded);
-    }
+/// What the terminal shows: a book, or the Treino (habit and exercises).
+enum Desk {
+    Book(PathBuf, Option<String>),
+    /// `grimoire treino [folder]`, or Treino chosen from the menu.
+    Treino(Option<PathBuf>),
+}
 
+/// Open the terminal once and move between the book and the Treino until
+/// one of them says leave.
+fn desk(first: Desk) -> Result<()> {
     let mut terminal = ratatui::try_init()
         .context("this needs a real terminal — grimoire cannot run in a pipe")?;
 
@@ -211,12 +220,65 @@ fn main() -> Result<()> {
         std::io::stdout(),
         PushKeyboardEnhancementFlags(KeyboardEnhancementFlags::DISAMBIGUATE_ESCAPE_CODES),
     );
+    shutdown::install();
+
+    let mut next = first;
+    let res = loop {
+        match next {
+            Desk::Treino(pedida) => {
+                let cfg = treino::Config {
+                    pedida,
+                    ultimo_livro: last_opened(),
+                    reserva: default_root().join("exercicios"),
+                };
+                let ev = events().lock().unwrap_or_else(|e| e.into_inner());
+                let r = treino::run(&mut terminal, cfg, &ev);
+                drop(ev);
+                match r {
+                    Ok(treino::Saida::Sair) => break Ok(()),
+                    Ok(treino::Saida::AbrirLivro(livro)) => match resolve_project(livro) {
+                        Ok((root, msg)) => next = Desk::Book(root, msg),
+                        Err(e) => break Err(e),
+                    },
+                    Err(e) => break Err(e),
+                }
+            }
+            Desk::Book(root, opening_msg) => match open_book(&mut terminal, root, opening_msg) {
+                Ok(Some(root)) => next = Desk::Treino(Some(root)),
+                Ok(None) => break Ok(()),
+                Err(e) => break Err(e),
+            },
+        }
+    };
+
+    let _ = execute!(std::io::stdout(), DisableBracketedPaste);
+    let _ = execute!(std::io::stdout(), DisableMouseCapture);
+    let _ = execute!(std::io::stdout(), PopKeyboardEnhancementFlags);
+    ratatui::restore();
+    res
+}
+
+/// Write in one book until it closes. `Some(root)` when Treino was chosen
+/// from the menu (everything is saved by then).
+fn open_book(
+    terminal: &mut ratatui::DefaultTerminal,
+    root: PathBuf,
+    opening_msg: Option<String>,
+) -> Result<Option<PathBuf>> {
+    remember(&root);
+
+    let stranded = project::restore_stranded(&root);
+    let project = Project::load(&root).context("loading project")?;
+    let mut app = App::new(project)?;
+    if let Some(m) = opening_msg {
+        app.msg = m;
+    }
+    if !stranded.is_empty() {
+        app.msg = App::stranded_note(&stranded);
+    }
     app.super_keys = cmd_is_reachable();
 
-    shutdown::install();
-    let res = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
-        run(&mut terminal, &mut app)
-    }));
+    let res = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| run(terminal, &mut app)));
     let res = match res {
         Ok(r) => r,
         Err(_) => {
@@ -234,12 +296,8 @@ fn main() -> Result<()> {
             std::process::exit(101);
         }
     };
-
-    let _ = execute!(std::io::stdout(), DisableBracketedPaste);
-    let _ = execute!(std::io::stdout(), DisableMouseCapture);
-    let _ = execute!(std::io::stdout(), PopKeyboardEnhancementFlags);
-    ratatui::restore();
-    res
+    res?;
+    Ok(app.want_treino.then_some(root))
 }
 
 const EXPORT_USAGE: &str = "grimoire export [dir] [--docx] [--pdf] [--paperback [--trim 6x9]] \
@@ -512,6 +570,27 @@ fn cmd_is_reachable() -> bool {
         || std::env::var("KITTY_WINDOW_ID").is_ok()
 }
 
+type Events = std::sync::mpsc::Receiver<std::io::Result<Event>>;
+
+/// Keys and the mouse, read on a thread of their own that lives as long as
+/// the program.
+fn events() -> &'static std::sync::Mutex<Events> {
+    static EVENTS: std::sync::OnceLock<std::sync::Mutex<Events>> = std::sync::OnceLock::new();
+    EVENTS.get_or_init(|| {
+        let (events_tx, events) = std::sync::mpsc::channel::<std::io::Result<Event>>();
+        std::thread::spawn(move || {
+            loop {
+                let ev = event::read();
+                let failed = ev.is_err();
+                if events_tx.send(ev).is_err() || failed {
+                    break;
+                }
+            }
+        });
+        std::sync::Mutex::new(events)
+    })
+}
+
 fn run(terminal: &mut ratatui::DefaultTerminal, app: &mut App) -> Result<()> {
     let mut confirm_quit = false;
     let mut last_frame = Instant::now();
@@ -520,16 +599,9 @@ fn run(terminal: &mut ratatui::DefaultTerminal, app: &mut App) -> Result<()> {
     // window closes, crossterm 0.29's reader spins forever on the dead tty
     // instead of returning; on this thread that can't stop the loop below from
     // seeing the hang-up, saving, and leaving (which ends the spinning thread).
-    let (events_tx, events) = std::sync::mpsc::channel::<std::io::Result<Event>>();
-    std::thread::spawn(move || {
-        loop {
-            let ev = event::read();
-            let failed = ev.is_err();
-            if events_tx.send(ev).is_err() || failed {
-                break;
-            }
-        }
-    });
+    // The one reader thread is shared with the Treino, so going between the
+    // two never leaves a stale reader behind to swallow a key.
+    let events = events().lock().unwrap_or_else(|e| e.into_inner());
 
     loop {
         // Closing the window or being told to stop: save, then go.

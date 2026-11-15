@@ -103,6 +103,8 @@ pub enum Action {
     /// Which voice reads aloud.
     Voices,
     OpenBookAt(std::path::PathBuf),
+    /// Save and leave for the Treino: habit session, exercises, Continue a frase.
+    Treino,
 }
 
 /// The menu's groups, each a short list of its own one level down.
@@ -302,6 +304,7 @@ pub fn entries(app: &crate::app::App) -> Vec<Entry> {
             Action::AuthorDetails,
         ),
         Entry::new("Writing sessions", "", Action::Sessions),
+        Entry::new("Treino: hábito e exercícios (treino)", "", Action::Treino),
         Entry::new("Save this session now", "", Action::SaveSession),
         Entry::new("Update project map", "", Action::ProjectMap),
         Entry::new("Compile manuscript (Markdown)", "", Action::Compile),
