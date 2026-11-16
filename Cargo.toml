@@ -2,6 +2,8 @@
 name = "grimoire-tui"
 version.workspace = true
 edition = "2024"
+# The oldest Rust that builds it: ratatui 0.30 and time 0.3.55 need 1.88.
+rust-version = "1.88"
 description = "A terminal writing desk for novels"
 authors = ["Catfinity Studios"]
 license = "MIT"

@@ -448,10 +448,14 @@ pub(crate) fn find_cover(p: &Project) -> Option<(&'static str, Vec<u8>)> {
     })
 }
 
-/// A scene's text as it goes into the book: `%% notes %%` out, TKs kept
-/// (see [`Book::tks`]), trimmed, and book typography done.
+/// A scene's text as it goes into the book: `%% notes %%` and the Treino's
+/// `[Próximo: …]` notes out, TKs kept (see [`Book::tks`]), trimmed, and book
+/// typography done. Every export and compile takes its scenes from here.
 pub(crate) fn prose(body: &str, hyphen: typeset::SpacedHyphen) -> Cow<'_, str> {
-    let noted = notes::strip_notes(body);
+    let noted = match notes::strip_next_notes(body) {
+        Cow::Borrowed(b) => notes::strip_notes(b),
+        Cow::Owned(o) => Cow::Owned(notes::strip_notes(&o).into_owned()),
+    };
     let trimmed: Cow<'_, str> = match noted {
         Cow::Borrowed(b) => Cow::Borrowed(b.trim()),
         Cow::Owned(o) => Cow::Owned(o.trim().to_string()),
@@ -2973,6 +2977,96 @@ mod tests {
     }
 
     #[test]
+    fn treino_next_notes_never_reach_any_export() {
+        let d = book_dir("proximo");
+        put(
+            &d,
+            "manuscript/01-Act-One/01-Chapter-One/01-Scene-One.md",
+            "---\ntitle: \"Scene One\"\n---\n\n[Próximo: BILHETEUM ela acha a carta]\n\n\
+             The building had no windows.\n",
+        );
+        put(
+            &d,
+            "manuscript/02-Act-Two/01-The-Long-Road/01-Road.md",
+            "The road ran on.\n\n[proximo: BILHETEDOIS no meio]\n\nAnd on.\n",
+        );
+        put(
+            &d,
+            "front-matter/01-Title.md",
+            "[PRÓXIMO: BILHETETRES]\nTHE ARCHIVE\n",
+        );
+        let p = Project::load(&d).unwrap();
+        let one = p
+            .nodes
+            .iter()
+            .find(|n| {
+                n.path
+                    .ends_with("01-Act-One/01-Chapter-One/01-Scene-One.md")
+            })
+            .unwrap();
+        assert_eq!(one.words(), 5, "the note isn't counted");
+
+        let secrets = [
+            "BILHETEUM",
+            "BILHETEDOIS",
+            "BILHETETRES",
+            "róximo",
+            "roximo",
+            "RÓXIMO",
+        ];
+        let md = markdown(&book(&p, None, Scope::Whole).unwrap());
+        for s in secrets {
+            assert!(!md.contains(s), "{s} reached the Markdown:\n{md}");
+        }
+        assert!(md.contains("The road ran on.\n\nAnd on."), "{md}");
+
+        // Every format at once, the paperback too.
+        let out = export(
+            &p,
+            &ExportOptions {
+                paperback: true,
+                paperback_pdf: false,
+                ..all_options()
+            },
+        )
+        .unwrap();
+        assert!(out.files.len() >= 4, "{:?}", out.files);
+        for f in &out.files {
+            let bytes = fs::read(f).unwrap();
+            let texts: Vec<String> = if bytes.starts_with(b"PK") {
+                unzip_bytes(&bytes)
+                    .into_iter()
+                    .map(|(_, b)| String::from_utf8_lossy(&b).into_owned())
+                    .collect()
+            } else {
+                vec![String::from_utf8_lossy(&bytes).into_owned()]
+            };
+            for t in &texts {
+                for s in secrets {
+                    assert!(!t.contains(s), "{s} reached {}", f.display());
+                }
+            }
+        }
+        let (fodt, _) = out.paperback_document.expect("the paperback's layout");
+        for s in secrets {
+            assert!(!fodt.contains(s), "{s} reached the paperback layout");
+        }
+
+        // The one-file compile, and the scene on disk keeps its note.
+        let c = crate::manuscript::compile(&p).unwrap();
+        let compiled = fs::read_to_string(&c.path).unwrap();
+        for s in secrets {
+            assert!(!compiled.contains(s), "{s} reached the compile");
+        }
+        assert!(
+            fs::read_to_string(d.join("manuscript/01-Act-One/01-Chapter-One/01-Scene-One.md"))
+                .unwrap()
+                .contains("[Próximo: BILHETEUM ela acha a carta]")
+        );
+        fs::remove_dir_all(&d).unwrap();
+    }
+
+    #[test]
     fn choosing_parts_keeps_the_books_own_chapter_numbers() {
         let d = book_dir("parts");
         let p = Project::load(&d).unwrap();
@@ -3212,7 +3306,10 @@ mod tests {
         assert!(styles.contains("w:line=\"480\""));
         assert!(styles.contains("<w:ind w:firstLine=\"720\"/>"));
         assert!(doc.contains("<w:pgSz w:w=\"12240\" w:h=\"15840\"/>"));
-        assert!(header.contains("Quill / ARCHIVE / "), "the byline's surname");
+        assert!(
+            header.contains("Quill / ARCHIVE / "),
+            "the byline's surname"
+        );
         fs::remove_dir_all(&d).unwrap();
     }
 

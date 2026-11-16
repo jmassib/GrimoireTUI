@@ -9,7 +9,7 @@ O modo Treino é para aquecer e criar o hábito antes de ir para o seu texto. Tu
 
 ## Os modos
 
-- **Sessão de hábito** (`1` ou `h`): escolha um texto do `manuscript/` ou comece um novo. Aparecem só o bilhete *[Próximo: …]* e o último parágrafo, para você redigitar e engatar. Timer de 10 minutos (liga e desliga com `F2`); quando acaba, aparece *Pode parar — ou continue*. Com `Esc`, o app pede o bilhete da próxima vez e grava no topo do texto.
+- **Sessão de hábito** (`1` ou `h`): escolha um texto do `manuscript/` ou comece um novo. Aparecem só o bilhete *[Próximo: …]* e o último parágrafo, para você redigitar e engatar. Timer de 10 minutos (liga e desliga com `F2`); quando acaba, aparece *Pode parar — ou continue*. Com `Esc`, o app pede o bilhete da próxima vez e grava no topo do texto. O bilhete fica só no arquivo: nenhuma exportação (Word, PDF, EPUB, brochura, Markdown) nem a compilação o levam.
 - **Exercícios** (`2` ou `e`): escolha um da lista ou *Aleatório* (`a`). A instrução e a meta ficam no topo. *Roleta de ideias* e *Colisão* sorteiam do seu `ideias.md` (`F5` sorteia de novo).
 - **Continue a frase** (`3` ou `f`): a abertura de um livro, com autor, obra e tradutor. Escolha um ou *Aleatório*.
 - **Dicas** (`4` ou `d`) e **Ir para o meu texto** (`5` ou `g`).

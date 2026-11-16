@@ -33,11 +33,13 @@ grimoire treino ~/writings # apontando a pasta
 Dentro do Grimoire: `Ctrl-K` › *Writing* › **Treino: hábito e exercícios…**, ou
 digite *treino* na busca do `Ctrl-K`. O livro é salvo antes de trocar.
 
+Para compilar e instalar (Rust 1.88 ou mais novo), veja [REQUISITOS.md](REQUISITOS.md).
+
 **No menu do Treino** (setas e `Enter`, ou o número):
 
 | Tecla | Modo | O que faz |
 |---|---|---|
-| `1` / `h` | Sessão de hábito | Escolha um texto de `manuscript/` (ou *Texto novo…*). Aparecem só o bilhete `[Próximo: …]` e o último parágrafo, para redigitar. Timer de 10 min (`F2` liga/desliga); no fim aparece *Pode parar — ou continue*. `Esc` pede o bilhete da próxima vez e grava no topo do texto. |
+| `1` / `h` | Sessão de hábito | Escolha um texto de `manuscript/` (ou *Texto novo…*). Aparecem só o bilhete `[Próximo: …]` e o último parágrafo, para redigitar. Timer de 10 min (`F2` liga/desliga); no fim aparece *Pode parar — ou continue*. `Esc` pede o bilhete da próxima vez e grava no topo do texto. O bilhete nunca sai na exportação nem na compilação. |
 | `2` / `e` | Exercícios | Escolha um da lista ou *Aleatório* (`a`). Instrução e meta ficam no topo. *Roleta de ideias* e *Colisão* sorteiam do `ideias.md` (`F5` sorteia outra). |
 | `3` / `f` | Continue a frase | A abertura de um livro, com autor, obra e tradutor. Escolha um ou *Aleatório* (`a`). |
 | `4` / `d` | Dicas | As 7 dicas do hábito. |
@@ -156,7 +158,10 @@ sudo pacman -S alsa-lib          # Arch
 
 ### From source
 
-Requires Rust 1.85 or newer.
+Requires Rust 1.88 or newer (`rustup update`). On Linux the music feature also
+needs the ALSA headers and `pkg-config` (`sudo apt install build-essential
+pkg-config libasound2-dev`), or build with `--no-default-features`. Everything
+needed, in Portuguese: [REQUISITOS.md](REQUISITOS.md).
 
 ```sh
 git clone https://github.com/kelsierbot/GrimoireTUI

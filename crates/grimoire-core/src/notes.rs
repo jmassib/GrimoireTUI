@@ -12,6 +12,9 @@
 //!
 //! Neither is counted as words, and neither goes into a compile or export.
 //! On disk they are kept exactly as typed.
+//!
+//! The Treino's `[Próximo: …]` note (a line of its own, see [`is_next_note`])
+//! is left out of every compile and export too.
 
 use std::borrow::Cow;
 
@@ -21,6 +24,52 @@ pub enum MarkKind {
     Note,
     /// `TK`.
     Tk,
+}
+
+/// Is `line` a Treino "next time" note, `[Próximo: …]` (or `[Proximo: …]`,
+/// any case), alone on its line? The habit session writes one at the top of
+/// a scene so the next session knows where to pick up.
+pub fn is_next_note(line: &str) -> bool {
+    let t = line.trim();
+    let Some(inside) = t.strip_prefix('[').and_then(|r| r.strip_suffix(']')) else {
+        return false;
+    };
+    let Some((label, _)) = inside.split_once(':') else {
+        return false;
+    };
+    matches!(label.trim().to_lowercase().as_str(), "próximo" | "proximo")
+}
+
+/// `text` without its `[Próximo: …]` notes. A line that is nothing but one goes,
+/// with one blank line beside it, so no empty paragraph is left behind. Text
+/// around it is untouched; on disk the note stays where it was.
+pub fn strip_next_notes(text: &str) -> Cow<'_, str> {
+    if !text.contains('[') {
+        return Cow::Borrowed(text);
+    }
+    let lines: Vec<&str> = text.split('\n').collect();
+    if !lines.iter().any(|l| is_next_note(l)) {
+        return Cow::Borrowed(text);
+    }
+    let mut out: Vec<&str> = Vec::with_capacity(lines.len());
+    let mut i = 0;
+    while i < lines.len() {
+        if is_next_note(lines[i]) {
+            let blank_after = lines.get(i + 1).is_some_and(|l| l.trim().is_empty());
+            if blank_after {
+                i += 2;
+            } else {
+                if out.last().is_some_and(|l| l.trim().is_empty()) {
+                    out.pop();
+                }
+                i += 1;
+            }
+            continue;
+        }
+        out.push(lines[i]);
+        i += 1;
+    }
+    Cow::Owned(out.join("\n"))
 }
 
 /// Byte ranges of every note in `text`, fences included. A note may cross
@@ -110,8 +159,11 @@ fn may_have_marks(text: &str) -> bool {
     text.contains("%%") || text.contains("TK")
 }
 
-/// Words, not counting notes or TKs.
+/// Words, not counting notes, TKs or `[Próximo: …]` notes.
 pub fn count_words(text: &str) -> usize {
+    if let Cow::Owned(o) = strip_next_notes(text) {
+        return count_words(&o);
+    }
     if !may_have_marks(text) {
         return text.split_whitespace().count();
     }
@@ -336,6 +388,36 @@ fn one_line(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn next_notes_are_recognised() {
+        assert!(is_next_note("[Próximo: ela encontra a carta]"));
+        assert!(is_next_note("  [proximo:ele mente]  "));
+        assert!(is_next_note("[PRÓXIMO: x]"));
+        assert!(!is_next_note("[Nota: x]"));
+        assert!(!is_next_note("Próximo: sem colchetes"));
+        assert!(!is_next_note("Ela disse [Próximo: x] e saiu."));
+    }
+
+    #[test]
+    fn next_notes_leave_the_text_without_a_gap() {
+        assert_eq!(
+            strip_next_notes("[Próximo: ela acha a carta]\n\nPrimeiro.\n\nSegundo.\n"),
+            "Primeiro.\n\nSegundo.\n"
+        );
+        assert_eq!(
+            strip_next_notes("Primeiro.\n\n[Próximo: x]\n\nSegundo."),
+            "Primeiro.\n\nSegundo."
+        );
+        assert_eq!(strip_next_notes("Primeiro.\n\n[Próximo: x]"), "Primeiro.");
+        let plain = "Nada de bilhete. Próximo capítulo, talvez.";
+        assert!(matches!(strip_next_notes(plain), Cow::Borrowed(_)));
+        assert_eq!(strip_next_notes(plain), plain);
+        assert_eq!(
+            count_words("[Próximo: ela acha a carta]\n\nTrês palavras aqui."),
+            3
+        );
+    }
 
     #[test]
     fn notes_and_tks_are_not_words() {
